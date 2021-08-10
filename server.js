@@ -22,6 +22,10 @@ app.post("/", (req, res) => {
   const file2 = req.files.idProofName;
   const file3 = req.files.idProofImg;
 
+  if (!file1 || !file2 || !file3) {
+    return res.status(400).json({ msg: "Files missing" });
+  }
+
   file1.mv(`${__dirname}/uploads/pic/${file1.name}`, (err) => {
     if (err) {
       console.error(err);
@@ -41,7 +45,10 @@ app.post("/", (req, res) => {
     }
   });
 
-  res.status(200).json({ msg: "User Registered Successfully" });
+  res.status(200).json({
+    msg: "User Registered Successfully",
+    subData: { ...req.body, files: req.files },
+  });
 });
 
 app.listen(5000, () => {
