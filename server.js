@@ -22,19 +22,19 @@ app.post("/", (req, res) => {
   const file2 = req.files.idProofName;
   const file3 = req.files.idProofImg;
 
-  file1.mv(`${__dirname}/uploads/${file1}`, (err) => {
+  file1.mv(`${__dirname}/uploads/pic/${file1.name}`, (err) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ msg: "Error moving file" });
     }
   });
-  file2.mv(`${__dirname}/uploads/${file2}`, (err) => {
+  file2.mv(`${__dirname}/uploads/idProofName/${file2.name}`, (err) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ msg: "Error moving file" });
     }
   });
-  file3.mv(`${__dirname}/uploads/${file3}`, (err) => {
+  file3.mv(`${__dirname}/uploads/idProofImg/${file3.name}`, (err) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ msg: "Error moving file" });
